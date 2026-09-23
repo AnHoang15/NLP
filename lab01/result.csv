@@ -1,0 +1,126 @@
+﻿Section,Metric,Value
+7.3,Number of documents (N),30000
+7.3,Vocabulary size (V),70361
+7.3,Matrix shape,"(30000, 70361)"
+
+Section,Metric,Value
+7.4,nnz(X),4849863
+7.4,N x V,2110830000
+7.4,Sparsity S,0.997702
+7.4,Sparsity (%),99.7702%
+
+7.5(a) Top 20 terms theo document frequency
+rank,term,document_frequency
+1,the,27893
+2,and,27423
+3,to,26690
+4,of,26031
+5,a,25942
+6,in,25229
+7,for,23651
+8,is,22740
+9,with,21405
+10,on,20262
+11,that,18370
+12,this,17842
+13,are,17594
+14,it,17168
+15,s,17147
+16,as,16474
+17,at,16348
+18,from,16317
+19,be,16157
+20,you,16094
+
+7.5(b) Top 20 terms theo IDF
+rank,term,idf
+1,بدون,10.210374
+2,aaaaa,10.210374
+3,ᐈ,10.210374
+4,พฤษภาคม,10.210374
+5,aamc,10.210374
+6,aam,10.210374
+7,aai,10.210374
+8,aacsb,10.210374
+9,aachen,10.210374
+10,aaba,10.210374
+11,marriageable,10.210374
+12,marquise,10.210374
+13,marquess,10.210374
+14,marquees,10.210374
+15,marquardt,10.210374
+16,тут,10.210374
+17,торрент,10.210374
+18,такое,10.210374
+19,т,10.210374
+20,ѕау,10.210374
+
+7.5(c) Top terms theo TF-IDF trong document #0
+rank,term,tfidf
+1,bbq,0.471622
+2,class,0.281704
+3,meat,0.198284
+4,kcbs,0.176218
+5,lonestar,0.171253
+6,will,0.157963
+7,missoula,0.153794
+8,apron,0.144361
+9,smoker,0.143476
+10,you,0.140031
+11,timelines,0.135364
+12,trimming,0.133332
+13,spectators,0.131087
+14,cost,0.130629
+15,rangers,0.127662
+16,beginner,0.119768
+17,beginners,0.118915
+18,culinary,0.118504
+19,tasting,0.113590
+20,be,0.111755
+
+So sánh 3 danh sách
+overlap_df_idf,(rỗng)
+overlap_df_tfidf,be; you
+overlap_idf_tfidf,(rỗng)
+
+Câu hỏi,Trả lời
+Tại sao một document chỉ dùng một phần rất nhỏ vocabulary nhưng vector vẫn có chiều V?,"Vì tất cả document phải nằm chung một không gian đặc trưng (chung V chiều ứng với toàn bộ từ vựng của corpus) để so sánh được với nhau; các chiều không dùng tới thì bằng 0, khiến ma trận rất thưa (sparse)."
+Một term xuất hiện rất nhiều trong corpus có nhất thiết có TF-IDF cao không?,"Một term xuất hiện rất nhiều trong corpus có nhất thiết có TF-IDF cao không? -> KHÔNG. Term xuất hiện ở nhiều document (df cao) sẽ có IDF thấp (IDF = log((1+N)/(1+df))+1, df càng lớn thì IDF càng nhỏ), nên dù TF trong 1 document nào đó cao, tích TF*IDF vẫn có thể thấp. Ví dụ điển hình là các stop-word (the, is, a...) xuất hiện ở hầu hết mọi document nhưng TF-IDF gần như bằng 0."
+Một term có IDF cao có nhất thiết có TF-IDF cao trong mọi document không?,"Một term có IDF cao có nhất thiết có TF-IDF cao trong mọi document không? -> KHÔNG. IDF là một hằng số tính trên toàn bộ corpus, không phụ thuộc vào từng document cụ thể. Nếu term đó không xuất hiện (hoặc xuất hiện rất ít) trong một document, thì TF của nó trong document đó gần bằng 0, khiến TF-IDF = TF*IDF cũng gần bằng 0 tại document đó, bất kể IDF cao đến đâu."
+
+8. KIỂM CHỨNG TF-IDF TỰ VIẾT BẰNG THƯ VIỆN sklearn
+
+Corpus kiểm thử (8.3)
+D1,cat eats fish
+D2,dog eats fish
+D3,cat likes fish
+
+Vocabulary tự xây,cat; dog; eats; fish; likes
+Vocabulary sklearn,cat; dog; eats; fish; likes
+Vocabulary khớp nhau,True
+
+document,term,tfidf_manual,tfidf_sklearn,abs_diff
+D1,cat,0.619805,0.619805,0.00e+00
+D1,dog,0.000000,0.000000,0.00e+00
+D1,eats,0.619805,0.619805,0.00e+00
+D1,fish,0.481334,0.481334,5.55e-17
+D1,likes,0.000000,0.000000,0.00e+00
+D2,cat,0.000000,0.000000,0.00e+00
+D2,dog,0.720333,0.720333,1.11e-16
+D2,eats,0.547832,0.547832,0.00e+00
+D2,fish,0.425441,0.425441,5.55e-17
+D2,likes,0.000000,0.000000,0.00e+00
+D3,cat,0.547832,0.547832,0.00e+00
+D3,dog,0.000000,0.000000,0.00e+00
+D3,eats,0.000000,0.000000,0.00e+00
+D3,fish,0.425441,0.425441,5.55e-17
+D3,likes,0.720333,0.720333,1.11e-16
+
+cap_document,cosine_manual,cosine_sklearn,abs_diff
+D1-D2,0.544328,0.544328,0.00e+00
+D1-D3,0.544328,0.544328,0.00e+00
+D2-D3,0.181000,0.181000,0.00e+00
+
+Sai lệch lớn nhất (TF-IDF),1.11e-16
+Ngưỡng cho phép,1e-09
+Kết luận,PASS
