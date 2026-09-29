@@ -1,0 +1,87 @@
+experiment,model,num_unique_ngrams,num_hapax
+exp1_corpus_stats,unigram,190836,91864
+exp1_corpus_stats,bigram,2847910,2014939
+exp1_corpus_stats,trigram,7042586,6012388
+
+experiment,model,train_ppl,valid_ppl,test_ppl,train_zero_pct,valid_zero_pct,test_zero_pct
+exp2_smoothing,Bigram MLE,161.46133261406933,inf,inf,0.0,21.7937,21.9892
+exp2_smoothing,Bigram Laplace,5208.543115369766,6748.741908859461,6761.919334875062,0.0,0.0,0.0
+exp2_smoothing,Trigram MLE,14.672185110817779,inf,inf,0.0,57.3771,57.4214
+exp2_smoothing,Trigram Laplace,28966.280096620467,47785.33528367372,48061.5837806685,0.0,0.0,0.0
+
+experiment,model,unique_ngrams,train_ppl,valid_ppl,test_ppl
+exp3_perplexity,Unigram MLE,167124,1634.0416423942809,inf,inf
+exp3_perplexity,Unigram Laplace,167124,1639.419191185091,1720.1173543700195,1722.7642148535556
+exp3_perplexity,Bigram MLE,2419124,161.46133261406933,inf,inf
+exp3_perplexity,Bigram Laplace,2419124,5208.543115369766,6748.741908859461,6761.919334875062
+exp3_perplexity,Trigram MLE,5824232,14.672185110817779,inf,inf
+exp3_perplexity,Trigram Laplace,5824232,28966.280096620467,47785.33528367372,48061.5837806685
+
+experiment,model,train_fraction,train_tokens,valid_ppl_laplace,valid_unseen_ngram_pct
+exp3_corpus_size,Unigram,0.1,896882,1866.1029336874838,4.1756
+exp3_corpus_size,Bigram,0.1,896882,24449.856925958855,38.104
+exp3_corpus_size,Trigram,0.1,896882,89545.6667920895,74.353
+exp3_corpus_size,Unigram,0.25,2246029,1751.8242236808837,2.9203
+exp3_corpus_size,Bigram,0.25,2246029,14685.283538332968,30.7449
+exp3_corpus_size,Trigram,0.25,2246029,71980.22441339496,67.7743
+exp3_corpus_size,Unigram,0.5,4465751,1726.787440909731,2.2478
+exp3_corpus_size,Bigram,0.5,4465751,9970.522688704807,25.9912
+exp3_corpus_size,Trigram,0.5,4465751,59500.97830625366,62.6953
+exp3_corpus_size,Unigram,1.0,8949462,1720.1173543700195,1.7443
+exp3_corpus_size,Bigram,1.0,8949462,6748.741908859461,21.7937
+exp3_corpus_size,Trigram,1.0,8949462,47785.33528367372,57.3771
+
+experiment,context,model,prediction,actual_next_word,top1_correct
+app_next_word,the cat,Bigram,</s>:0.103; s:0.050; and:0.044,queen,False
+app_next_word,the cat,Trigram,s:0.074; </s>:0.062; can:0.049,queen,False
+app_next_word,natural language,Bigram,</s>:0.126; and:0.103; of:0.050,analysis,False
+app_next_word,natural language,Trigram,processing:0.357; </s>:0.214; laboratory:0.214,analysis,False
+app_next_word,machine learning,Bigram,</s>:0.090; and:0.079; to:0.058,</s>,True
+app_next_word,machine learning,Trigram,and:0.125; algorithms:0.062; to:0.062,</s>,False
+app_next_word,thank you,Bigram,can:0.111; are:0.066; have:0.052,for,False
+app_next_word,thank you,Trigram,for:0.368; </s>:0.190; so:0.085,for,True
+app_next_word,new york,Bigram,city:0.153; </s>:0.107; times:0.103,city,True
+app_next_word,new york,Trigram,city:0.164; times:0.111; </s>:0.108,city,True
+app_next_word,in the,Bigram,first:0.010; most:0.010; best:0.010,world,False
+app_next_word,in the,Trigram,world:0.021; past:0.014; first:0.014,world,True
+
+experiment,model,top1_acc_pct,top5_acc_pct,unseen_context_pct
+app_next_word_accuracy,Unigram,10.94,20.52,0.0
+app_next_word_accuracy,Bigram,15.06,28.76,2.36
+app_next_word_accuracy,Trigram,14.2,23.54,20.64
+
+experiment,context,model,candidate,n_tokens,log_prob,avg_log_prob,rank_by_logp,rank_by_avg
+app_sentence_ranking,machine learning,Bigram Laplace,is useful for NLP,4,-36.5929,-9.1482,3,1
+app_sentence_ranking,machine learning,Bigram Laplace,studies language models,3,-35.411,-11.8037,1,2
+app_sentence_ranking,machine learning,Bigram Laplace,banana computer quickly,3,-36.0994,-12.0331,2,3
+app_sentence_ranking,machine learning,Trigram Laplace,is useful for NLP,4,-45.1631,-11.2908,3,1
+app_sentence_ranking,machine learning,Trigram Laplace,banana computer quickly,3,-36.08,-12.0267,1,2
+app_sentence_ranking,machine learning,Trigram Laplace,studies language models,3,-36.08,-12.0267,1,2
+app_sentence_ranking,thank you,Bigram Laplace,for your help,3,-18.3922,-6.1307,2,1
+app_sentence_ranking,thank you,Bigram Laplace,very much,2,-14.758,-7.379,1,2
+app_sentence_ranking,thank you,Bigram Laplace,help your for,3,-27.1218,-9.0406,3,3
+app_sentence_ranking,thank you,Trigram Laplace,for your help,3,-22.2152,-7.4051,2,1
+app_sentence_ranking,thank you,Trigram Laplace,very much,2,-16.2579,-8.129,1,2
+app_sentence_ranking,thank you,Trigram Laplace,help your for,3,-34.9903,-11.6634,3,3
+app_sentence_ranking,natural language,Bigram Laplace,and the,2,-10.5921,-5.296,1,1
+app_sentence_ranking,natural language,Bigram Laplace,processing is important,3,-25.5735,-8.5245,3,2
+app_sentence_ranking,natural language,Bigram Laplace,banana quickly,2,-24.0613,-12.0307,2,3
+app_sentence_ranking,natural language,Trigram Laplace,and the,2,-21.8566,-10.9283,1,1
+app_sentence_ranking,natural language,Trigram Laplace,processing is important,3,-34.2879,-11.4293,3,2
+app_sentence_ranking,natural language,Trigram Laplace,banana quickly,2,-24.0531,-12.0265,2,3
+
+experiment,model,train_unique_ngrams,test_unique_ngrams,unseen_types_test,unseen_types_pct_test,unseen_tokens_pct_valid,unseen_tokens_pct_test,unseen_context_tokens_pct_test
+ctxlen_unseen,Unigram,167124,49918,12400,24.8407,1.7443,1.8262,0.0
+ctxlen_unseen,Bigram,2419124,461648,217979,47.2176,21.7937,21.9892,1.8262
+ctxlen_unseen,Trigram,5824232,848926,612976,72.2061,57.3771,57.4214,21.584
+
+experiment,model,train_ppl,valid_ppl,test_ppl
+ctxlen_ppl,Unigram MLE,1634.0416423942809,inf,inf
+ctxlen_ppl,Unigram Laplace,1639.419191185091,1720.1173543700195,1722.7642148535556
+ctxlen_ppl,Bigram MLE,161.46133261406933,inf,inf
+ctxlen_ppl,Bigram Laplace,5208.543115369766,6748.741908859461,6761.919334875062
+ctxlen_ppl,Trigram MLE,14.672185110817779,inf,inf
+ctxlen_ppl,Trigram Laplace,28966.280096620467,47785.33528367372,48061.5837806685
+ctxlen_ppl,Unigram add-k (k=1),1639.419191185091,1720.1173543700195,1722.7642148535556
+ctxlen_ppl,Bigram add-k (k=0.001),229.8431256145829,1194.7649042046282,1213.7056567361706
+ctxlen_ppl,Trigram add-k (k=0.001),136.21932126186786,8356.823895346844,8418.16650882605
